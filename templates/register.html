@@ -1,0 +1,12 @@
+<title>Register</title>
+ <h1>New User? <br /></h1>
+ <h2>Register Using The Form Below</h2>
+
+ <form action ="." method='post'>
+ 	{{form.as_p}}
+ 	{% csrf_token %}
+ 	<input type='hidden' name='next' value='{{ next }}' />
+ 	<input type = 'submit' value='register' />
+ </form>
+
+
