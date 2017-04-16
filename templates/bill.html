@@ -1,0 +1,28 @@
+<head>
+	<title>Invoice</title>
+</head>
+<table>
+	<tr><td colspan='4' align='center'>Invoice</td></tr>
+	<tr>
+		<th>Product</th>
+		<th>Cost</th>
+		<th>Quantity</th>
+		<th>Total</th>
+	</tr>
+{% for purchase in purchases %}
+<tr>
+	<td align='center'>{{ purchase.product.product_name}}</td>
+	<td align='center'>{{ purchase.product.cost }}</td>
+	<td align='center'>{{ purchase.quantity }}</td>
+	<td align='center'>{{ purchase.total_cost }}</td>
+	
+</tr>
+{% endfor %}
+</table>
+
+<h3>Total Cost:</h3>{{ net_cost }}, with {{ order.tax }}% tax.<br/> 
+<h3>Address:</h3> {{ order.address }}<br/>
+<h3>Contact:</h3> {{ order.contact }}<br/>
+<h3>Date:</h3> {{ order.order_made_on }}
+<br/>
+<a href="{% url 'pdf_view' order.id %}">Print Pdf</a>

@@ -1,0 +1,30 @@
+<head>
+<title>Order</title>
+</head>
+<h2>Place your order Here</h2>
+<table>
+<tr>
+	<td>Product</td>
+	<td>Quantity</td>
+</tr>
+<form action="." method='post'>
+	{% csrf_token %}
+	{% for i in range %}
+	<tr>
+	<td>
+	<select name='name{{i}}'>
+		<option value=""></option>
+		{% for product in products %}
+		<option value='{{product.id}}'>{{product.product_name}}</option>
+		{% endfor %}
+	</select>
+	</td>
+	<td><input type='text' name='quantity{{ i }}'/></td>
+    </tr>
+	<br/>
+	{% endfor %}
+</table>
+{{ order_form.as_p }}
+<input type='submit' value="Place Order">
+</form>
+

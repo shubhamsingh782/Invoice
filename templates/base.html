@@ -1,0 +1,56 @@
+<html>
+<head><title>Index</title></head>
+<body>
+{% if not user.is_authenticated %}
+	 <h1>Log In</h1>
+
+ {% if error %}
+      {{ error }}
+ {% endif %}
+
+ {% if 'next' in request.GET %}
+   <G>you are successfully registered now login.</h3>
+ {% endif %}
+
+ <form action= "." method='post'>
+ 	{{ form.as_p }}
+ 	{% csrf_token %}
+ <input type='submit' value='Login'>
+</form>
+
+New User? <a href="{% url 'register' %}">Register</a> Here.
+
+{% else %}
+
+<h2><p>Hello {{ user.first_name }} {{user.last_name}}</p></h2>
+<h4>Here is The List of Your Purchases</h4>
+
+{% if not orders %}
+
+<h3>You haven't placed any orders yet</h3>
+
+{% else %}
+    <table border='1'>
+    	<tr>
+    		<td>Contact</td>
+    		<td>Address</td>
+    		<td>Total Order Cost</td>
+    		<td>Applied Tax</td>
+    		<td>pdf</td>
+    	</tr>
+	{% for order in orders %}
+	<tr>
+		<td>{{ order.contact }}</td>
+		<td>{{order.address}}</td>
+		<td>{{ order.total_product_cost }}</td>
+		<td>{{ order.tax }}</td>
+		<td><a href="{% url 'print_pdf' order.id %}">Get Invoice</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% endif %}
+<a href="{% url 'place_order' %}">Place an Order</a>
+<a href="{% url 'logout' %}">Logout</a>
+{% endif %}
+</body>
+</html>
